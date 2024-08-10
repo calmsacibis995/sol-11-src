@@ -1,0 +1,464 @@
+'\" te
+.\" 版权所有 1989 AT&T
+.\" 版权所有 (c) 2008，2010，Oracle 和/或其附属公司。保留所有权利。
+.TH Intro 1 "2010 年 7 月 12 日" "SunOS 5.11" "用户命令"
+.SH 名称
+Intro, intro \- 命令和应用程序的介绍
+.SH 描述
+.sp
+.LP
+本节介绍了此操作系统可用的命令（按字母顺序排列）。
+.sp
+.LP
+需特别关注的页面归类如下：
+.sp
+.ne 2
+.mk
+.na
+\fB1B\fR
+.ad
+.RS 6n
+.rt  
+只能在 \fISunOS/BSD 兼容性软件包\fR中找到的命令。 
+.RE
+
+.sp
+.ne 2
+.mk
+.na
+\fB1C\fR
+.ad
+.RS 6n
+.rt  
+用于与其他系统进行通信的命令。
+.RE
+
+.sp
+.ne 2
+.mk
+.na
+\fB1S\fR
+.ad
+.RS 6n
+.rt  
+特定于 SunOS 的命令。
+.RE
+
+.SS "其他节"
+.sp
+.LP
+有关更多信息，请参见 SunOS 参考手册的以下各节。
+.RS +4
+.TP
+.ie t \(bu
+.el o
+第 1M 节介绍了系统维护命令。
+.RE
+.RS +4
+.TP
+.ie t \(bu
+.el o
+第 4 节介绍了有关文件格式的信息。
+.RE
+.RS +4
+.TP
+.ie t \(bu
+.el o
+第 5 节是关于公共可用文件和杂项信息页的描述。
+.RE
+.sp
+.LP
+有关这些命令和程序的教程信息，请参见\fI《Solaris Advanced User\&'s Guide》\fR。
+.SS "手册页命令语法"
+.sp
+.LP
+除非另有说明，手册页的"概要"部分介绍的命令将按以下语法接受选项和其他参数，并应按下述方式进行解释。
+.sp
+.LP
+\fIname\fR [\fB-\fR\fIoption\fR...] [\fIcmdarg\fR...] 其中：
+.sp
+.ne 2
+.mk
+.na
+\fB[ ]\fR
+.ad
+.RS 15n
+.rt  
+将非必需的\fI选项\fR 或 \fIcmdarg\fR 括在其中。
+.RE
+
+.sp
+.ne 2
+.mk
+.na
+\fB\fI\&...\fR\fR
+.ad
+.RS 15n
+.rt  
+表示有多个\fI选项\fR 或 \fIcmdarg\fR。
+.RE
+
+.sp
+.ne 2
+.mk
+.na
+\fB\fIname\fR\fR
+.ad
+.RS 15n
+.rt  
+可执行文件的名称。
+.RE
+
+.sp
+.ne 2
+.mk
+.na
+\fB{ }\fR
+.ad
+.RS 15n
+.rt  
+括在大括号内的选项和/或参数是相互依赖的，因此必须将大括号中的所有内容视为一个单元。
+.RE
+
+.sp
+.ne 2
+.mk
+.na
+\fB\fIoption\fR\fR
+.ad
+.RS 15n
+.rt  
+（始终以 "\(mi" 开头。）\fInoargletter\fR... 或 \fIargletter\fR \fIoptarg\fR[\fB,\fR...] 
+.RE
+
+.sp
+.ne 2
+.mk
+.na
+\fB\fInoargletter\fR\fR
+.ad
+.RS 15n
+.rt  
+表示不带选项参数的选项的单个字母。注意，可以将多个 \fInoargletter\fR 选项组合在一个 "\(mi" 之后（参见下面的准则 5）。
+.RE
+
+.sp
+.ne 2
+.mk
+.na
+\fB\fIargletter\fR\fR
+.ad
+.RS 15n
+.rt  
+表示需要选项参数的选项的单个字母。
+.RE
+
+.sp
+.ne 2
+.mk
+.na
+\fB\fIoptarg\fR\fR
+.ad
+.RS 15n
+.rt  
+符合前面的某个 \fIargletter\fR 的选项参数（字符串）。请注意，在 \fIargletter\fR 后面的 \fIoptargs\fR 组必须以逗号分隔，或者以制表符或空格字符分隔并用引号括起来（参见下面的准则 8）。
+.RE
+
+.sp
+.ne 2
+.mk
+.na
+\fB\fIcmdarg\fR\fR
+.ad
+.RS 15n
+.rt  
+\fI未\fR以 "\(mi" 开头的路径名（或其他命令参数），或者本身表示标准输入的 "\(mi"。
+.RE
+
+.sp
+.LP
+除非另有说明，否则，只要操作数或选项参数是数字值，或者包含数字值：
+.RS +4
+.TP
+.ie t \(bu
+.el o
+该数字就被解释为十进制整数。
+.RE
+.RS +4
+.TP
+.ie t \(bu
+.el o
+0 到 2147483647 范围内的数字从语法上可识别为数字值。
+.RE
+.RS +4
+.TP
+.ie t \(bu
+.el o
+如果实用程序描述中指出它可接受负数作为操作数或选项参数，则 -2147483647 到 2147483647 范围内的数字从语法上可识别为数字值。
+.RE
+.RS +4
+.TP
+.ie t \(bu
+.el o
+允许比此处列出的范围更大的范围。
+.RE
+.SS "命令语法标准：准则"
+.sp
+.LP
+并不是所有当前命令都遵循这些命令语法准则，但新命令很可能遵循它们。所有 shell 程序都应当使用 \fBgetopts\fR(1) 来解析位置参数和检查合法选项。它支持下面的准则 3 至 10。其他准则的实施必须由命令本身来执行。
+.RS +4
+.TP
+1.
+命令名称（参见上面的 \fIname\fR）的长度应该为 2 到 9 个字符。
+.RE
+.RS +4
+.TP
+2.
+命令名称应该只包括小写字母和数字。
+.RE
+.RS +4
+.TP
+3.
+选项名称（参见上面的 \fIoption\fR）的长度必须为一个字符。
+.RE
+.RS +4
+.TP
+4.
+所有选项都必须以 "\(mi" 开头。
+.RE
+.RS +4
+.TP
+5.
+可以将没有参数的多个选项组合在单个 "\(mi" 之后。
+.RE
+.RS +4
+.TP
+6.
+一个选项之后的第一个选项参数（参见上面的 \fIoptarg\fR）必须以制表符或空格字符开头。
+.RE
+.RS +4
+.TP
+7.
+选项参数不是可选的。
+.RE
+.RS +4
+.TP
+8.
+一个选项之后的选项参数组必须以逗号分隔，或者以制表符或空格字符分隔并用引号括起来（\fB-o\fR xxx,z,yy 或 \fB-o\fR"xxx z yy"）。
+.RE
+.RS +4
+.TP
+9.
+在命令行上所有选项都必须位于操作数（参见上面的 \fIcmdarg\fR）之前。
+.RE
+.RS +4
+.TP
+10.
+"\(mi\|\(mi" 可以用来表示选项的结尾。
+.RE
+.RS +4
+.TP
+11.
+选项相对于彼此的顺序应当无关紧要。
+.RE
+.RS +4
+.TP
+12.
+操作数（参见上面的 \fIcmdarg\fR）的相对顺序能够以操作数随之出现的命令所决定的方式影响操作数的意义。
+.RE
+.RS +4
+.TP
+13.
+只应使用前后都有一个空格字符的 "\(mi" 来表示标准输入。
+.RE
+.sp
+.LP
+已经为 Solaris 和其他 Sun 产品开发了一组扩展的准则，称为 CLIP，即命令行界接口范例 (Command Line Interface Paradigm)。其目的是提供与 Linux 系统上广泛应用的 GNU 命令行语法更为密切一致的命令行语法，而不是为了改进现有的实用程序或将此应用于所有新的实用程序。按照计划，该组扩展准则只在合适的时候应用于正在开发中的实用程序集。
+.sp
+.LP
+CLIP 是上面讨论的准则的一个完整超集，与 IEEE Std. 1003.1-2001 (SUSv3) 密切一致。它并未包括所有的 GNU 语法。GNU 语法允许使用与 IEEE 规则冲突的结构或具有二义性的结构。这些结构是不允许的。
+.sp
+.LP
+扩展的 CLIP 命令行语法为：
+.sp
+.in +2
+.nf
+utility_name -a --longopt1 -c option_argument \e
+   -f option_argument --longopt2=option_argument \e
+   --longopt3 option_argument operand
+.fi
+.in -2
+.sp
+
+.sp
+.LP
+示例中的实用程序被命名为 \fButility_name\fR。它后面跟有选项、选项参数和操作数，这些统称为参数。由一个连字符及紧跟其后的单个字母或数字组成的参数（如 \fB-a\fR）称为短选项。由两个连字符及紧跟其后的一系列字母、数字和连字符组成的参数（如 \fB--longopt1\fR）称为长选项。短选项和长选项统称为选项（以前称为标志）。某些选项后面跟有选项参数，如 \fB-c\fR option_argument 所示。最后一个选项和选项参数后面的参数称为操作数。一旦遇到第一个操作数，所有后续的参数都被解释为操作数。
+.sp
+.LP
+选项参数有时显示为以空格与其短选项隔开，有时显示为直接相邻。这反映了以下情形，在某些情况下，选项参数与选项包含在同一参数字符串内；大多数情况下，它作为下一个参数。此规范要求选项是与其选项参数隔开的一个参数，但为确保以前的应用程序能够继续运行，也有一些例外。
+.RS +4
+.TP
+.ie t \(bu
+.el o
+如果实用程序的\fB概要\fR在短选项和选项参数之间显示了一个空格（如此示例中的 \fB-c\fR option_argument 所示），则应用程序应当将该选项及其选项参数用作隔开的参数。
+.RE
+.RS +4
+.TP
+.ie t \(bu
+.el o
+如果未显示空格（如此示例中的 \fB-f\fR option_argument 所示），则应用程序期望选项与其选项参数在同一参数字符串中直接相邻，而不插入空格。
+.RE
+.RS +4
+.TP
+.ie t \(bu
+.el o
+尽管存在上述要求，但无论概要行中是否存在空格，应用程序都应接受短选项和选项参数作为单个参数或隔开的参数。
+.RE
+.RS +4
+.TP
+.ie t \(bu
+.el o
+具有选项参数的长选项始终规定如下：使用等号作为选项名称和选项参数之间的分隔符。如果实用程序的\fB选项\fR部分在长选项与其选项参数之间显示了一个等号 (\fB=\fR)（如此示例中的 \fB--longopt2= option_argument\fR 所示），则应用程序应当还允许将该选项与其选项参数作为隔开的参数使用（如此示例中的 \fB--longopt1 option_argument\fR 所示）。 
+.RE
+.sp
+.LP
+CLIP 扩展了前面讨论的准则，附加了下列准则：
+.sp
+.ne 2
+.mk
+.na
+\fB14.\fR
+.ad
+.RS 7n
+.rt  
+可以使用 \fBcommand subcommand [options] [operands]\fR 格式对类似的操作进行分组。子命令名称应该与命令名称遵循相同的约定，如准则 1 和 2 中所述。
+.RE
+
+.sp
+.ne 2
+.mk
+.na
+\fB15.\fR
+.ad
+.RS 7n
+.rt  
+长选项应该以 \fB--\fR 开头，并且只应当包含可移植字符集中的字母数字字符和连字符。选项名称通常为 1 到 3 个单词长度，并以连字符分隔每个单词。
+.RE
+
+.sp
+.ne 2
+.mk
+.na
+\fB16.\fR
+.ad
+.RS 7n
+.rt  
+应当使用 \fB--name=argument\fR 来指定长选项的选项参数。还允许 \fB--name argument\fR 格式。 
+.RE
+
+.sp
+.ne 2
+.mk
+.na
+\fB17.\fR
+.ad
+.RS 7n
+.rt  
+所有实用程序都应该支持两个标准长选项：\fB--version\fR（具有短选项同义词 \fB-V\fR）和 \fB--help\fR（具有短选项同义词 \fB-?\fR）。如果 \fB--\fRversion 的该首选短选项同义词已被使用，可以更换其短选项同义词（但必须提供一个短选项同义词）。在遇到这两个选项时，都会停止进一步处理参数，并且在显示相应的输出后，实用程序会成功退出。 
+.RE
+
+.sp
+.ne 2
+.mk
+.na
+\fB18.\fR
+.ad
+.RS 7n
+.rt  
+每个短选项只应当有一个对应的长选项，每个长选项只应当有一个对应的短选项。为了与以前的做法或等效实用程序的社区版本兼容，允许使用同义选项。
+.RE
+
+.sp
+.ne 2
+.mk
+.na
+\fB19.\fR
+.ad
+.RS 7n
+.rt  
+短选项名称应该根据以下规则从长选项名称中获取：
+.RS +4
+.TP
+1.
+使用长选项名称的第一个字母作为短选项名称。 
+.RE
+.RS +4
+.TP
+2.
+如果第一个字母与其他短选项名称冲突，则选择一个显眼的辅音字母。
+.RE
+.RS +4
+.TP
+3.
+如果第一个字母和显眼的辅音字母均与其他短选项名称冲突，则选择一个显眼的元音字母。
+.RE
+.RS +4
+.TP
+4.
+如果长选项名称中的字母都不可用，则选择一个任意字符。
+.RE
+.RE
+
+.sp
+.ne 2
+.mk
+.na
+\fB20.\fR
+.ad
+.RS 7n
+.rt  
+如果长选项名称由单个字符组成，它必须使用同一字符作为短选项名称。应避免单字符的长选项。只有单个字符是最具描述性的名称时，才允许单字符的长选项，这种情况极少。
+.RE
+
+.sp
+.ne 2
+.mk
+.na
+\fB21.\fR
+.ad
+.RS 7n
+.rt  
+附加的 CLIP 准则的准则 1 中描述的这种格式的子命令一般是必需的。如果省略了该子命令，则命令将不接受任何操作数，并且只允许所定义的在遇到时会停止进一步处理参数的选项。在不提供子命令和参数的情况下使用此格式调用命令是错误的。提供此准则是为了允许以命令-子命令结构接受常用格式的命令 \fB--help\fR、命令 \fB-?\fR、命令 \fB--version\fR 以及命令 \fB-V\fR。
+.RE
+
+.sp
+.LP
+其中的一些准则只有实用程序的创作者才会感兴趣。在此处提供它们是为了方便想要编写遵循此语法的实用程序的人使用。
+.SH 致谢
+.sp
+.LP
+Oracle America, Inc. 非常感谢开放组 (The Open Group) 允许复制版权归其所有的部分文档。可以通过 http://www.opengroup.org/bookstore/ 在线访问开放组 (The Open Group) 的原始文档。
+.sp
+.LP
+美国电气及电子工程师学会 (Institute of Electrical and Electronics Engineers, IEEE) 与开放组 (Open Group) 已授予我们部分翻印其文档的权限。
+.sp
+.LP
+在以下陈述中，短语"此文本"指部分的系统文档。
+.sp
+.LP
+Sun 操作系统参考手册中以电子形式从以下来源翻印和复制了此文本的一部分：IEEE Std 1003.1, 2004 Edition, Standard for Information Technology -- Portable Operating System Interface (POSIX)，The Open Group Base Specifications Issue 6, 版权所有 (C) 2001-2004，美国电气及电子工程师学会与开放组。如果这些版本与原始 IEEE 和开放组标准之间存在任何差异，请以原始 IEEE 和开放组标准为准。原始标准可通过 http://www.opengroup.org/unix/online.html 在线访问。
+.sp
+.LP
+在所有包含该资料的产品中都应提供此声明。
+.SH 另请参见
+.sp
+.LP
+\fBgetopts\fR(1)、\fBwait\fR(1)、\fBexit\fR(2)、\fBgetopt\fR(3C)
+.SH 诊断
+.sp
+.LP
+在终止时，每个命令返回两个状态字节，一个由系统提供并给出终止原因，在"正常"终止的情况下，另一个由程序提供 [请参见 \fBexit\fR(2)]。前一个字节为 \fB0\fR，表示正常终止。后一个字节通常为 \fB0\fR，表示成功执行，而非零则表示出现故障，例如参数错误、数据错误或无法访问数据。它的名称不一，可称为"退出代码"、"退出状态"或"返回代码"，仅在涉及特殊约定时才会进行描述。
+.SH 警告
+.sp
+.LP
+当处理包含空字符的文件时，某些命令会产生异常结果。这些命令通常将文本输入行视为字符串，因此在行中遇到空字符（字符串结束符）时会出现混乱。

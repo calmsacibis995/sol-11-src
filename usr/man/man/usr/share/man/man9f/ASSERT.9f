@@ -1,0 +1,43 @@
+'\" te
+.\" Copyright (c) 2006, Sun Microsystems, Inc.
+.TH ASSERT 9F "16 Jan 2006" "SunOS 5.11" "Kernel Functions for Drivers"
+.SH NAME
+ASSERT, assert \- expression verification
+.SH SYNOPSIS
+.LP
+.nf
+#include <sys/debug.h>
+
+
+
+\fBvoid\fR \fBASSERT\fR(\fB\fR\fIEX\fR);
+.fi
+
+.SH INTERFACE LEVEL
+.sp
+.LP
+Architecture independent level 1 (DDI/DKI).
+.SH PARAMETERS
+.sp
+.ne 2
+.mk
+.na
+\fB\fIEX\fR\fR
+.ad
+.RS 6n
+.rt  
+boolean expression.
+.RE
+
+.SH DESCRIPTION
+.sp
+.LP
+The \fBASSERT()\fR macro checks to see if the expression \fIEX\fR is true. If it is not, then \fBASSERT()\fR causes an error message to be logged to the console and the system to panic. \fBASSERT()\fR works only if the preprocessor symbol \fBDEBUG\fR is defined.
+.SH CONTEXT
+.sp
+.LP
+The \fBASSERT()\fR macro can be used from user, interrupt, or kernel context.
+.SH SEE ALSO
+.sp
+.LP
+\fIWriting Device Drivers\fR

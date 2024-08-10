@@ -1,0 +1,25 @@
+'\" te
+.\"  Copyright (c) 2011, Oracle and/or its affiliates. All rights reserved.
+.TH mwac 5 "13 Apr 2011" "SunOS 5.11" "Standards, Environments, and Macros"
+.SH NAME
+mwac, MWAC \- Mandatory Write Access Control
+.SH DESCRIPTION
+.sp
+.LP
+Mandatory Write Access Control (MWAC) implements a new policy in the Oracle Solaris operating environment, that allows for fine- grained control over the writability of objects on otherwise read-only file systems.
+.sp
+.LP
+In the current instance of the Oracle Solaris operating environment, MWAC is available only to non-global zones. The global zone implements the MWAC policy for non-global zones, preventing any overruling of the policy from within the non-global zone. 
+.sp
+.LP
+Zones marked as \fBread-only\fR have their root file system write-protected by MWAC. Only the file system objects that are write-listed by the read-only-profile are writable. See \fBzonecfg\fR(1M). Other file system objects are read-only.
+.sp
+.LP
+Creating links to objects that are read-only by virtue of the MWAC-policy is not allowed. 
+.SH SEE ALSO
+.sp
+.LP
+\fBln\fR(1), \fBzoneadm\fR(1M), \fBzonecfg\fR(1M), \fBlink\fR(2), \fBpathconf\fR(2)
+.sp
+.LP
+\fIOracle Solaris Administration: Security Services\fR
